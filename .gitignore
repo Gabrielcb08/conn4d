@@ -1,0 +1,94 @@
+# Delphi build artifacts
+*.dcu
+*.dcp
+*.bpl
+*.drc
+*.map
+*.rsm
+*.identcache
+*.tvsconfig
+*.local
+*.stat
+*.delphilsp.json
+
+# Executables and libraries
+*.exe
+*.dll
+
+# C++ Builder artifacts
+*.obj
+*.hpp
+*.ilc
+*.ild
+*.ilf
+*.ils
+*.o
+
+# Delphi history and caches
+__history/
+__recovery/
+*.~*
+*.ddp
+*.dsk
+*.tmp
+*.bak
+*.backup
+*.orig
+*.rej
+*.dproj.local
+*.groupproj.local
+
+# Build output folders
+**/build/
+**/dist/
+**/out/
+**/bin/
+Win32/
+Win64/
+OSX64/
+Linux64/
+
+# IDE and workspace
+.vscode/
+.idea/
+*.code-workspace
+*.launch
+*.launch.json
+
+# Test and tool outputs
+coverage/
+reports/
+*.log
+dunitx-results.xml
+*.out
+*.err
+
+# Sample connection settings (real credentials — never commit)
+**/settings.ini
+
+# Local environment and secrets
+.env
+.env.*
+*.env
+*.secret
+*.secrets
+*.token
+*.apikey
+
+# Local databases (never commit database files)
+*.fdb
+*.gdb
+*.db
+*.sqlite
+*.sqlite3
+*.sdf
+*.mdb
+
+# Claude Code local settings (personal developer config)
+.claude/
+
+# Vendored dependencies (installed by Boss)
+modules/
+
+# Boss packages
+boss-lock.json

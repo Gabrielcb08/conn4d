@@ -1,0 +1,55 @@
+package Conn4D;
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Conn4D Runtime Package'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+{$WARN IMPLICIT_IMPORT OFF}
+
+requires
+  rtl,
+  vcl,
+  dbrtl,
+  FireDAC;
+
+contains
+  Conn4D in '..\..\src\Conn4D.pas',
+  Conn4D.Domain.Exceptions in '..\..\src\01 - Domain\Conn4D.Domain.Exceptions.pas',
+  Conn4D.Domain.Types in '..\..\src\01 - Domain\Conn4D.Domain.Types.pas',
+  Conn4D.Domain.PoolConfig in '..\..\src\01 - Domain\Conn4D.Domain.PoolConfig.pas',
+  Conn4D.Application.Contracts.IProvider in '..\..\src\02 - Application Contracts\Conn4D.Application.Contracts.IProvider.pas',
+  Conn4D.Application.Contracts.IPool in '..\..\src\02 - Application Contracts\Conn4D.Application.Contracts.IPool.pas',
+  Conn4D.Application.Pool in '..\..\src\03 - Application\Conn4D.Application.Pool.pas',
+  Conn4D.Application.PoolRegistry in '..\..\src\03 - Application\Conn4D.Application.PoolRegistry.pas',
+  Conn4D.Application.Transaction in '..\..\src\03 - Application\Conn4D.Application.Transaction.pas',
+  Conn4D.Application.Handle in '..\..\src\03 - Application\Conn4D.Application.Handle.pas',
+  Conn4D.Application.Configurator in '..\..\src\03 - Application\Conn4D.Application.Configurator.pas',
+  Conn4D.Infrastructure.FireDAC.ConnectionHandle in '..\..\src\04 - Infrastructure\FireDAC\Conn4D.Infrastructure.FireDAC.ConnectionHandle.pas',
+  Conn4D.Infrastructure.FireDAC.TransactionHandle in '..\..\src\04 - Infrastructure\FireDAC\Conn4D.Infrastructure.FireDAC.TransactionHandle.pas',
+  Conn4D.Infrastructure.FireDAC.Provider in '..\..\src\04 - Infrastructure\FireDAC\Conn4D.Infrastructure.FireDAC.Provider.pas',
+  Conn4D.Presentation.Facade in '..\..\src\05 - Presentation\Conn4D.Presentation.Facade.pas',
+  Conn4D.Presentation.Components.TConn4D in '..\..\src\05 - Presentation\Components\Conn4D.Presentation.Components.TConn4D.pas';
+
+end.

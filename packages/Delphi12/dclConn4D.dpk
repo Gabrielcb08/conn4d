@@ -1,0 +1,16 @@
+package dclConn4D;
+
+{$DESCRIPTION 'Conn4D design-time package - ORData palette'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  designide,
+  Conn4D,
+  FireDACIBDriver;
+
+contains
+  Conn4D.Reg in '..\..\src\05 - Presentation\Components\Conn4D.Reg.pas';
+
+end.

@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A5A47DCF-6A6A-49A3-8A4D-EC9E61488D3F}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Conn4D.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dclConn4D.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Conn4D">
+        <MSBuild Projects="Conn4D.dproj"/>
+    </Target>
+    <Target Name="Conn4D:Clean">
+        <MSBuild Projects="Conn4D.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Conn4D:Make">
+        <MSBuild Projects="Conn4D.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclConn4D">
+        <MSBuild Projects="dclConn4D.dproj"/>
+    </Target>
+    <Target Name="dclConn4D:Clean">
+        <MSBuild Projects="dclConn4D.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclConn4D:Make">
+        <MSBuild Projects="dclConn4D.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Conn4D;dclConn4D"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Conn4D:Clean;dclConn4D:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Conn4D:Make;dclConn4D:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

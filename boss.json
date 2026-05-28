@@ -1,0 +1,16 @@
+{
+	"name": "conn4d",
+	"description": "Provider-neutral connection management library for Delphi 12 (FireDAC adapter included). Named pools, RAII handles and transactions, background sweep — no SQL execution, no ORM, no Spring4D.",
+	"version": "0.3.0-alpha.1",
+	"homepage": "https://github.com/gabrielcb08/conn4d",
+	"mainsrc": "./src",
+	"projects": [
+		"./packages/Delphi12/Conn4D.dproj",
+		"./tests/Conn4D.Tests/Conn4D.Tests.dproj",
+		"./samples/BasicUsage/BasicUsage.dproj",
+		"./samples/AdvancedUsage/AdvancedUsage.dproj"
+	],
+	"dependencies": {
+		"github.com/VSoftTechnologies/DUnitX": "^1.0.0"
+	}
+}

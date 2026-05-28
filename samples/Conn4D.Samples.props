@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Conn4DSpring4DRoot Condition="'$(Conn4D_Spring4DPath)'!=''">$(Conn4D_Spring4DPath)</Conn4DSpring4DRoot>
+    <Conn4DSpring4DRoot Condition="'$(Conn4DSpring4DRoot)'==''">$(MSBuildThisFileDirectory)..\modules\spring4d\Source</Conn4DSpring4DRoot>
+    <Conn4DSpring4DSearchPath>$(Conn4DSpring4DRoot);$(Conn4DSpring4DRoot)\Base;$(Conn4DSpring4DRoot)\Base\Collections;$(Conn4DSpring4DRoot)\Base\Logging;$(Conn4DSpring4DRoot)\Base\Patches;$(Conn4DSpring4DRoot)\Base\Patterns;$(Conn4DSpring4DRoot)\Core;$(Conn4DSpring4DRoot)\Core\Container;$(Conn4DSpring4DRoot)\Core\Interception;$(Conn4DSpring4DRoot)\Core\Logging;$(Conn4DSpring4DRoot)\Core\Mocking;$(Conn4DSpring4DRoot)\Core\Services;$(Conn4DSpring4DRoot)\Data;$(Conn4DSpring4DRoot)\Extensions;$(Conn4DSpring4DRoot)\Persistence</Conn4DSpring4DSearchPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DCC_UnitSearchPath>$(DCC_UnitSearchPath);$(Conn4DSpring4DSearchPath)</DCC_UnitSearchPath>
+    <DCC_IncludePath>$(Conn4DSpring4DRoot);$(DCC_IncludePath)</DCC_IncludePath>
+  </PropertyGroup>
+</Project>
