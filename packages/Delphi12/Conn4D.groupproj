@@ -9,6 +9,15 @@
         <Projects Include="dclConn4D.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\..\samples\BasicUsage\BasicUsage.dproj">
+            <Dependencies>Conn4D</Dependencies>
+        </Projects>
+        <Projects Include="..\..\samples\AdvancedUsage\AdvancedUsage.dproj">
+            <Dependencies>Conn4D</Dependencies>
+        </Projects>
+        <Projects Include="..\..\samples\FormUsage\FormUsage.dproj">
+            <Dependencies>Conn4D</Dependencies>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +44,41 @@
     <Target Name="dclConn4D:Make">
         <MSBuild Projects="dclConn4D.dproj" Targets="Make"/>
     </Target>
+    <Target Name="BasicUsage">
+        <MSBuild Projects="..\..\samples\BasicUsage\BasicUsage.dproj"/>
+    </Target>
+    <Target Name="BasicUsage:Clean">
+        <MSBuild Projects="..\..\samples\BasicUsage\BasicUsage.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BasicUsage:Make">
+        <MSBuild Projects="..\..\samples\BasicUsage\BasicUsage.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AdvancedUsage">
+        <MSBuild Projects="..\..\samples\AdvancedUsage\AdvancedUsage.dproj"/>
+    </Target>
+    <Target Name="AdvancedUsage:Clean">
+        <MSBuild Projects="..\..\samples\AdvancedUsage\AdvancedUsage.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AdvancedUsage:Make">
+        <MSBuild Projects="..\..\samples\AdvancedUsage\AdvancedUsage.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FormUsage">
+        <MSBuild Projects="..\..\samples\FormUsage\FormUsage.dproj"/>
+    </Target>
+    <Target Name="FormUsage:Clean">
+        <MSBuild Projects="..\..\samples\FormUsage\FormUsage.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FormUsage:Make">
+        <MSBuild Projects="..\..\samples\FormUsage\FormUsage.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Conn4D;dclConn4D"/>
+        <CallTarget Targets="Conn4D;dclConn4D;BasicUsage;AdvancedUsage;FormUsage"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Conn4D:Clean;dclConn4D:Clean"/>
+        <CallTarget Targets="Conn4D:Clean;dclConn4D:Clean;BasicUsage:Clean;AdvancedUsage:Clean;FormUsage:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Conn4D:Make;dclConn4D:Make"/>
+        <CallTarget Targets="Conn4D:Make;dclConn4D:Make;BasicUsage:Make;AdvancedUsage:Make;FormUsage:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

@@ -53,23 +53,28 @@ uses
   Conn4D.Domain.Types,
   Conn4D.Application.Contracts.IPool,
   Conn4D.Application.PoolRegistry,
-  Conn4D.Infrastructure.FireDAC.Provider;
+  Conn4D.Container;
 
 var
-  GFireDACProviderRegistered : Boolean = False;
-  GRegLock                   : TObject;
+  GProvidersRegistered : Boolean = False;
+  GRegLock             : TObject;
 
-procedure EnsureFireDACProvider;
+procedure EnsureProviders;
+var
+  Providers : TArray<IConn4DProvider>;
+  P         : IConn4DProvider;
 begin
-  if GFireDACProviderRegistered then
+  if GProvidersRegistered then
     Exit;
 
   TMonitor.Enter(GRegLock);
   try
-    if GFireDACProviderRegistered then
+    if GProvidersRegistered then
       Exit;
-    TConn4DPoolRegistry.Instance.RegisterProvider(TConn4DFireDACProvider.Create);
-    GFireDACProviderRegistered := True;
+    Providers := TConn4DContainer.ResolveProviders;
+    for P in Providers do
+      TConn4DPoolRegistry.Instance.RegisterProvider(P);
+    GProvidersRegistered := True;
   finally
     TMonitor.Exit(GRegLock);
   end;
@@ -79,7 +84,7 @@ end;
 
 class function TConn4D.Configure : TConn4DConfigurator;
 begin
-  EnsureFireDACProvider;
+  EnsureProviders;
   Result := TConn4DConfigurator.Create;
 end;
 
@@ -99,7 +104,7 @@ var
   Conn  : IConn4DNativeConnection;
   Guard : IConn4DLeaseGuard;
 begin
-  EnsureFireDACProvider;
+  EnsureProviders;
   Pool   := TConn4DPoolRegistry.Instance.GetPool(APoolName);
   Conn   := Pool.Acquire;
   Guard  := TConn4DLeaseGuardImpl.Create(Pool, Conn);

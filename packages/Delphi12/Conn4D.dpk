@@ -32,7 +32,9 @@ requires
   rtl,
   vcl,
   dbrtl,
-  FireDAC;
+  FireDAC,
+  Spring.Base,
+  Spring.Core;
 
 contains
   Conn4D in '..\..\src\Conn4D.pas',
@@ -49,6 +51,7 @@ contains
   Conn4D.Infrastructure.FireDAC.ConnectionHandle in '..\..\src\04 - Infrastructure\FireDAC\Conn4D.Infrastructure.FireDAC.ConnectionHandle.pas',
   Conn4D.Infrastructure.FireDAC.TransactionHandle in '..\..\src\04 - Infrastructure\FireDAC\Conn4D.Infrastructure.FireDAC.TransactionHandle.pas',
   Conn4D.Infrastructure.FireDAC.Provider in '..\..\src\04 - Infrastructure\FireDAC\Conn4D.Infrastructure.FireDAC.Provider.pas',
+  Conn4D.Container in '..\..\src\05 - Presentation\Conn4D.Container.pas',
   Conn4D.Presentation.Facade in '..\..\src\05 - Presentation\Conn4D.Presentation.Facade.pas',
   Conn4D.Presentation.Components.TConn4D in '..\..\src\05 - Presentation\Components\Conn4D.Presentation.Components.TConn4D.pas';
 
