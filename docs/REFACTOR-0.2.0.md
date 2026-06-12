@@ -170,7 +170,7 @@ Removido `OnQuery` (`TConn4DQueryKind`) — a biblioteca não emite mais eventos
 
 ```text
 src/
-├─ 01 - Domain/                            ← Exceptions, defaults, tx-state enum
+├─ 01 - Core/                              ← Exceptions, defaults, tx-state enum
 │  ├─ Conn4D.Domain.Exceptions.pas         (− Command/ReaderException; + HandleCastException)
 │  ├─ Conn4D.Domain.TransactionState.pas
 │  └─ Conn4D.Domain.Types.pas
