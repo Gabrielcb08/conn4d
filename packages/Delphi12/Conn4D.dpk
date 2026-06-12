@@ -38,9 +38,9 @@ requires
 
 contains
   Conn4D in '..\..\src\Conn4D.pas',
-  Conn4D.Domain.Exceptions in '..\..\src\01 - Domain\Conn4D.Domain.Exceptions.pas',
-  Conn4D.Domain.Types in '..\..\src\01 - Domain\Conn4D.Domain.Types.pas',
-  Conn4D.Domain.PoolConfig in '..\..\src\01 - Domain\Conn4D.Domain.PoolConfig.pas',
+  Conn4D.Domain.Exceptions in '..\..\src\01 - Core\Conn4D.Domain.Exceptions.pas',
+  Conn4D.Domain.Types in '..\..\src\01 - Core\Conn4D.Domain.Types.pas',
+  Conn4D.Domain.PoolConfig in '..\..\src\01 - Core\Conn4D.Domain.PoolConfig.pas',
   Conn4D.Application.Contracts.IProvider in '..\..\src\02 - Application Contracts\Conn4D.Application.Contracts.IProvider.pas',
   Conn4D.Application.Contracts.IPool in '..\..\src\02 - Application Contracts\Conn4D.Application.Contracts.IPool.pas',
   Conn4D.Application.Pool in '..\..\src\03 - Application\Conn4D.Application.Pool.pas',

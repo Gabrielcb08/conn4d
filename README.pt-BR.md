@@ -299,11 +299,11 @@ Um pacote consumidor — por exemplo o **Query4D** para montar SQL fluente — �
 
 ## Arquitetura
 
-O Conn4D segue **Clean Architecture** com dependências estritas apontando para dentro.
+O Conn4D segue **Clean Architecture** (regra de dependência + Ports & Adapters) — *não* DDD. Pooling de conexão é uma preocupação técnica/de apoio, sem domínio de negócio; por isso a camada mais interna é **Core** (tipos primitivos, defaults de política e o Value Object `TConn4DPoolConfig`), e não um "Domain" no sentido de Eric Evans.
 
 ```
 src/
-├─ 01 - Domain/                ← exceções, record de config de pool, enums + defaults
+├─ 01 - Core/                  ← exceções, config de pool (Value Object), enums + defaults
 ├─ 02 - Application Contracts/ ← portas provider-neutral (IProvider, IPool)
 ├─ 03 - Application/           ← pool, registry, handle/transação RAII, configurador fluente
 ├─ 04 - Infrastructure/FireDAC/← o adapter IConn4DProvider incluído
@@ -316,7 +316,7 @@ flowchart TD
     AP["03 · Application — pool · registry · handle/tx RAII · configurador"]
     IN["04 · Infrastructure/FireDAC — adapter de provider"]
     CO["02 · Application Contracts — IProvider · IPool (portas)"]
-    DO["01 · Domain — exceções · config de pool · enums · defaults"]
+    DO["01 · Core — exceções · config de pool · enums · defaults"]
     PR --> AP
     AP --> CO
     IN --> CO

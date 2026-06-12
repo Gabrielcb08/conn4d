@@ -8,7 +8,8 @@ Conn4D is built on **Clean Architecture** with strict, inward-pointing dependenc
 
 ## Principles
 
-- **Clean Architecture** — dependencies point inward (toward Domain and Application Contracts). No layer references a layer above it.
+- **Clean Architecture, not DDD** — Conn4D is a *technical / supporting* library: connection pooling has no business domain, no entities, no aggregates. So the innermost layer is called **Core** (pure types, policy constants, a config Value Object), not "Domain" in the Eric Evans sense. What we apply is the Clean Architecture *dependency rule* (everything points inward) plus Ports & Adapters — both orthogonal to DDD.
+- **Dependencies point inward** — toward Core and Application Contracts. No layer references a layer above it.
 - **Provider-neutral core** — the public surface has **zero** FireDAC dependency except the convenience implicit operators on the two handle records. All pool, registry, configurator and transaction logic depends only on `IConn4DProvider` / `IConn4DNativeConnection` / `IConn4DNativeTransaction`.
 - **RAII by default** — handles are **records** backed by reference-counted guards. The pool slot is released, and an uncommitted transaction is rolled back, automatically when the record leaves scope.
 - **No SQL, no ORM** — Conn4D hands out connection/transaction handles; SQL execution belongs to a consumer layer (e.g. Query4D).
@@ -20,9 +21,9 @@ Conn4D is built on **Clean Architecture** with strict, inward-pointing dependenc
 
 ```
 src/
-├─ 01 - Domain/                  ← pure types, no outward dependencies
+├─ 01 - Core/                    ← pure types, no outward dependencies
 │   ├─ Conn4D.Domain.Types        (TConn4DPoolState, TConn4DTxState, TConn4DDefaults)
-│   ├─ Conn4D.Domain.PoolConfig   (TConn4DPoolConfig — ApplyDefaults / Validate)
+│   ├─ Conn4D.Domain.PoolConfig   (TConn4DPoolConfig — ApplyDefaults / Validate, a Value Object)
 │   └─ Conn4D.Domain.Exceptions   (EConn4D* hierarchy)
 │
 ├─ 02 - Application Contracts/   ← provider-neutral ports
@@ -46,6 +47,8 @@ src/
     ├─ Conn4D.Container             (TConn4DContainer — Spring4D bootstrap)
     └─ Components/                  (TConn4D non-visual component + Conn4D.Reg)
 ```
+
+> **Note on naming:** the unit identifiers keep the historical `Conn4D.Domain.*` infix for source compatibility, even though the folder/layer is now **Core**. Renaming the units would be a breaking change for consumers with no functional benefit, so only the layer label changed.
 
 ### Dependency rule
 
@@ -73,16 +76,16 @@ flowchart TD
         IPL["IConn4DPool"]
         INC["IConn4DNativeConnection / Transaction"]
     end
-    subgraph Domain["01 · Domain"]
+    subgraph Core["01 · Core"]
         TY["enums · defaults"]
-        PC["TConn4DPoolConfig"]
+        PC["TConn4DPoolConfig (Value Object)"]
         EX["EConn4D* exceptions"]
     end
 
     Presentation --> Application
     Application --> Contracts
     Infra --> Contracts
-    Contracts --> Domain
+    Contracts --> Core
     Presentation -. "resolves provider via container" .-> Infra
 ```
 
@@ -92,11 +95,11 @@ flowchart TD
 
 | Layer | Component | Responsibility |
 | ----- | --------- | -------------- |
-| Domain | `TConn4DPoolState` | Slot state enum (`psIdle`, `psAcquired`, `psUnhealthy`) |
-| Domain | `TConn4DTxState` | `tsActive`, `tsCommitted`, `tsRolledBack`, `tsAbandoned` |
-| Domain | `TConn4DDefaults` | Default policy constants (pool name, driver, sizes, timeouts) |
-| Domain | `TConn4DPoolConfig` | Pool config record — `ApplyDefaults`, `Validate` |
-| Domain | `EConn4D*Exception` | Exception hierarchy rooted at `EConn4DException` |
+| Core | `TConn4DPoolState` | Slot state enum (`psIdle`, `psAcquired`, `psUnhealthy`) |
+| Core | `TConn4DTxState` | `tsActive`, `tsCommitted`, `tsRolledBack`, `tsAbandoned` |
+| Core | `TConn4DDefaults` | Default policy constants (pool name, driver, sizes, timeouts) |
+| Core | `TConn4DPoolConfig` | Pool config **Value Object** — `ApplyDefaults`, `Validate` |
+| Core | `EConn4D*Exception` | Exception hierarchy rooted at `EConn4DException` |
 | Contract | `IConn4DProvider` | Engine extension point — create/connect/validate/destroy |
 | Contract | `IConn4DNativeConnection` / `IConn4DNativeTransaction` | Neutral wrappers around driver objects |
 | Contract | `IConn4DPool` | Internal pool port — `Acquire`, `Release`, `Sweep`, `SweepIfDue` |
