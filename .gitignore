@@ -92,3 +92,6 @@ modules/
 
 # Boss packages
 boss-lock.json
+
+# Build artifacts produced by scripts/boss-build.ps1 (boss postinstall)
+bin/

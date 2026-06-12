@@ -12,13 +12,35 @@ boss install https://github.com/gabrielcb08/conn4d@v0.3.0-alpha.1
 boss install https://github.com/gabrielcb08/conn4d
 ```
 
-Boss clones the repo into `./modules/conn4d`, resolves transitive dependencies (DUnitX), and patches your project's search paths so `uses Conn4D;` works out of the box.
+Boss clones the repo into `./modules/conn4d`, resolves transitive dependencies (Spring4D + DUnitX), and patches your project's search paths so `uses Conn4D;` works out of the box.
 
-**Spring4D** is **not** a required dependency from `0.3.0-alpha.1` onward. If your project already uses Spring4D and you want `TConn4DContainer` bootstrap, add it separately:
+**Spring4D** is a required dependency: Conn4D links `Spring.Base` / `Spring.Core` (used internally by `TConn4DContainer` for provider resolution). Boss pulls the `andriwsluna/Spring4D` fork declared in `boss.json` automatically.
 
-```bash
-boss install bitbucket.org/sglienke/spring4d@^2.0.2
+## Automated build (`postinstall`)
+
+`boss.json` declares a `postinstall` hook that runs `scripts/boss-build.ps1` right after dependencies are resolved, so a fresh `boss install` leaves the library compiled with no manual IDE step. It builds (Win32, Release):
+
+- **Spring4D core** — `Spring.Base` and `Spring.Core` (Conn4D links them)
+- **Runtime package** — `Conn4D.dproj`
+- **Design-time package** — `dclConn4D.dproj`
+
+Artifacts (`.dcp` / `.bpl` / `.dcu`) go to `bin\Win32` inside the repo, so nothing pollutes the global RAD Studio directories.
+
+**Requirements**
+- RAD Studio / Delphi **12 Athens (23.0)** — auto-detected via the `BDS` env var → Windows registry → the default `…\Studio\23.0` path.
+- `git` on PATH (only as a fallback, to fetch Spring4D source if `modules/Spring4D/repo/Source` is missing).
+
+Run it manually (e.g. after pulling changes):
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/boss-build.ps1
 ```
+
+To skip the build, remove the `scripts.postinstall` entry from `boss.json` (or set `$BuildSpringCore = $false` in the script to skip only the Spring step).
+
+> **Win64 is out of scope.** Design-time packages are 32-bit (the IDE is a 32-bit process), and Win64 `dcc64` builds hit the 32 000-char command-line limit when the machine's global Win64 library path is long. Build Win64 from the IDE if you need it.
+>
+> **Close RAD Studio** (or uninstall the package from the IDE) before running, otherwise the `.bpl` write can fail with `F2039` (file locked).
 
 ## Update
 

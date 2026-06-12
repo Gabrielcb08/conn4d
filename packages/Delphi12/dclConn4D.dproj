@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{8D842D16-E5F7-47F8-8A23-C4505AA7F08D}</ProjectGuid>
         <MainSource>dclConn4D.dpk</MainSource>
@@ -36,7 +36,7 @@
         <GenPackage>true</GenPackage>
         <GenDll>true</GenDll>
         <DCC_ImageBase>00400000</DCC_ImageBase>
-        <DCC_UnitSearchPath>$(MSBuildProjectDirectory)\..\..\src;$(MSBuildProjectDirectory)\..\..\src\05 - Presentation\Components;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>$(MSBuildProjectDirectory)\..\..\bin\$(Platform);$(MSBuildProjectDirectory)\..\..\src;$(MSBuildProjectDirectory)\..\..\src\05 - Presentation\Components;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_BplOutput>$(BDSCOMMONDIR)\Bpl</DCC_BplOutput>
         <DCC_DcpOutput>$(BDSCOMMONDIR)\Dcp</DCC_DcpOutput>
         <DCC_DcuOutput>$(MSBuildProjectDirectory)\build\$(Platform)\$(Config)\dcu</DCC_DcuOutput>

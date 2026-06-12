@@ -14,5 +14,8 @@
 	"dependencies": {
 		"github.com/VSoftTechnologies/DUnitX": "^1.0.0",
 		"github.com/andriwsluna/Spring4D": "v1.0.1"
+	},
+	"scripts": {
+		"postinstall": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/boss-build.ps1"
 	}
 }
