@@ -1,7 +1,7 @@
 {
 	"name": "conn4d",
 	"description": "Provider-neutral connection management library for Delphi 12 (FireDAC adapter included). Named pools, RAII handles and transactions, background sweep — no SQL execution, no ORM.",
-	"version": "0.3.0-alpha.1",
+	"version": "v1.0.0",
 	"homepage": "https://github.com/gabrielcb08/conn4d",
 	"mainsrc": "./src",
 	"projects": [
