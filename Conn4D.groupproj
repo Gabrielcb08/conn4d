@@ -1,0 +1,72 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{C04D0000-4D00-4C00-9000-0000000000FF}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="packages\Delphi12\Conn4D.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="packages\Delphi12\dclConn4D.dproj">
+            <Dependencies>packages\Delphi12\Conn4D.dproj</Dependencies>
+        </Projects>
+        <Projects Include="tests\Conn4D.Tests.dproj">
+            <Dependencies>packages\Delphi12\Conn4D.dproj</Dependencies>
+        </Projects>
+        <Projects Include="samples\ConnMonitor\ConnMonitor.dproj">
+            <Dependencies>packages\Delphi12\Conn4D.dproj</Dependencies>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Conn4D">
+        <MSBuild Projects="packages\Delphi12\Conn4D.dproj"/>
+    </Target>
+    <Target Name="Conn4D:Clean">
+        <MSBuild Projects="packages\Delphi12\Conn4D.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Conn4D:Make">
+        <MSBuild Projects="packages\Delphi12\Conn4D.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclConn4D" DependsOnTargets="Conn4D">
+        <MSBuild Projects="packages\Delphi12\dclConn4D.dproj"/>
+    </Target>
+    <Target Name="dclConn4D:Clean">
+        <MSBuild Projects="packages\Delphi12\dclConn4D.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclConn4D:Make" DependsOnTargets="Conn4D">
+        <MSBuild Projects="packages\Delphi12\dclConn4D.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Conn4D_Tests" DependsOnTargets="Conn4D">
+        <MSBuild Projects="tests\Conn4D.Tests.dproj"/>
+    </Target>
+    <Target Name="Conn4D_Tests:Clean">
+        <MSBuild Projects="tests\Conn4D.Tests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Conn4D_Tests:Make" DependsOnTargets="Conn4D">
+        <MSBuild Projects="tests\Conn4D.Tests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ConnMonitor" DependsOnTargets="Conn4D">
+        <MSBuild Projects="samples\ConnMonitor\ConnMonitor.dproj"/>
+    </Target>
+    <Target Name="ConnMonitor:Clean">
+        <MSBuild Projects="samples\ConnMonitor\ConnMonitor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ConnMonitor:Make" DependsOnTargets="Conn4D">
+        <MSBuild Projects="samples\ConnMonitor\ConnMonitor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Conn4D;dclConn4D;Conn4D_Tests;ConnMonitor"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Conn4D:Clean;dclConn4D:Clean;Conn4D_Tests:Clean;ConnMonitor:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Conn4D:Make;dclConn4D:Make;Conn4D_Tests:Make;ConnMonitor:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

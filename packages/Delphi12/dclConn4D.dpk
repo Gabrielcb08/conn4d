@@ -1,16 +1,47 @@
-package dclConn4D;
+﻿package dclConn4D;
 
-{$DESCRIPTION 'Conn4D design-time package - ORData palette'}
+{
+  Conn4D — Pacote DESIGN (dclConn4.bpl)
+
+  Pacote instalável na IDE: registra o componente TConn4D na paleta ORData e
+  linka o ícone (Conn4D.Register.dcr). Depende do runtime Conn4. Não contém
+  código de runtime — só o registro.
+}
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE RELEASE}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Conn4D Design - registro do TConn4D na paleta ORData'}
 {$DESIGNONLY}
 {$IMPLICITBUILD ON}
 
 requires
-  rtl,
   designide,
-  Conn4D,
-  FireDACIBDriver;
+  Conn4D;
 
 contains
-  Conn4D.Reg in '..\..\src\05 - Presentation\Components\Conn4D.Reg.pas';
+  Conn4D.Register in 'Conn4D.Register.pas';
 
 end.

@@ -1,4 +1,6 @@
-package Conn4D;
+﻿package Conn4D;
+
+{$R *.res}
 {$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
 {$ALIGN 8}
 {$ASSERTIONS ON}
@@ -22,37 +24,68 @@ package Conn4D;
 {$MINENUMSIZE 1}
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
+{$DEFINE CONN4D_NOAUTOLINK}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'Conn4D Runtime Package'}
 {$RUNONLY}
 {$IMPLICITBUILD ON}
-{$WARN IMPLICIT_IMPORT OFF}
 
 requires
   rtl,
-  vcl,
-  dbrtl,
   FireDAC,
-  Spring.Base,
-  Spring.Core;
+  vcl,
+  FireDACMSSQLDriver,
+  FireDACSqliteDriver,
+  FireDACMySQLDriver,
+  FireDACIBDriver,
+  FireDACCommonODBC,
+  FireDACPgDriver,
+  vclFireDAC;
 
 contains
-  Conn4D in '..\..\src\Conn4D.pas',
-  Conn4D.Domain.Exceptions in '..\..\src\01 - Core\Conn4D.Domain.Exceptions.pas',
-  Conn4D.Domain.Types in '..\..\src\01 - Core\Conn4D.Domain.Types.pas',
-  Conn4D.Domain.PoolConfig in '..\..\src\01 - Core\Conn4D.Domain.PoolConfig.pas',
-  Conn4D.Application.Contracts.IProvider in '..\..\src\02 - Application Contracts\Conn4D.Application.Contracts.IProvider.pas',
-  Conn4D.Application.Contracts.IPool in '..\..\src\02 - Application Contracts\Conn4D.Application.Contracts.IPool.pas',
-  Conn4D.Application.Pool in '..\..\src\03 - Application\Conn4D.Application.Pool.pas',
-  Conn4D.Application.PoolRegistry in '..\..\src\03 - Application\Conn4D.Application.PoolRegistry.pas',
-  Conn4D.Application.Transaction in '..\..\src\03 - Application\Conn4D.Application.Transaction.pas',
-  Conn4D.Application.Handle in '..\..\src\03 - Application\Conn4D.Application.Handle.pas',
-  Conn4D.Application.Configurator in '..\..\src\03 - Application\Conn4D.Application.Configurator.pas',
-  Conn4D.Infrastructure.FireDAC.ConnectionHandle in '..\..\src\04 - Infrastructure\FireDAC\Conn4D.Infrastructure.FireDAC.ConnectionHandle.pas',
-  Conn4D.Infrastructure.FireDAC.TransactionHandle in '..\..\src\04 - Infrastructure\FireDAC\Conn4D.Infrastructure.FireDAC.TransactionHandle.pas',
-  Conn4D.Infrastructure.FireDAC.Provider in '..\..\src\04 - Infrastructure\FireDAC\Conn4D.Infrastructure.FireDAC.Provider.pas',
-  Conn4D.Container in '..\..\src\05 - Presentation\Conn4D.Container.pas',
-  Conn4D.Presentation.Facade in '..\..\src\05 - Presentation\Conn4D.Presentation.Facade.pas',
-  Conn4D.Presentation.Components.TConn4D in '..\..\src\05 - Presentation\Components\Conn4D.Presentation.Components.TConn4D.pas';
+  Conn4D.Shared.Types in '..\..\src\Shared\Conn4D.Shared.Types.pas',
+  Conn4D.Shared.Config in '..\..\src\Shared\Conn4D.Shared.Config.pas',
+  Conn4D.Shared.Exceptions in '..\..\src\Shared\Conn4D.Shared.Exceptions.pas',
+  Conn4D.Shared.Logger in '..\..\src\Shared\Conn4D.Shared.Logger.pas',
+  Conn4D.Core.Base in '..\..\src\Core\Abstractions\Conn4D.Core.Base.pas',
+  Conn4D.Core.Engine in '..\..\src\Core\Abstractions\Conn4D.Core.Engine.pas',
+  Conn4D.Core.Pool in '..\..\src\Core\Abstractions\Conn4D.Core.Pool.pas',
+  Conn4D.Core.Transaction in '..\..\src\Core\Abstractions\Conn4D.Core.Transaction.pas',
+  Conn4D.Core.HealthCheck in '..\..\src\Core\Abstractions\Conn4D.Core.HealthCheck.pas',
+  Conn4D.Core.Observer in '..\..\src\Core\Abstractions\Conn4D.Core.Observer.pas',
+  Conn4D.Core.GC in '..\..\src\Core\Abstractions\Conn4D.Core.GC.pas',
+  Conn4D.Core.Clock in '..\..\src\Core\Abstractions\Conn4D.Core.Clock.pas',
+  Conn4D.Core.Monitor in '..\..\src\Core\Abstractions\Conn4D.Core.Monitor.pas',
+  Conn4D.Core in '..\..\src\Core\Abstractions\Conn4D.Core.pas',
+  Conn4D.Core.Config in '..\..\src\Core\Services\Conn4D.Core.Config.pas',
+  Conn4D.Core.SystemClock in '..\..\src\Core\Services\Conn4D.Core.SystemClock.pas',
+  Conn4D.Core.Semaphore in '..\..\src\Core\Services\Conn4D.Core.Semaphore.pas',
+  Conn4D.Core.ThreadSafeQueue in '..\..\src\Core\Services\Conn4D.Core.ThreadSafeQueue.pas',
+  Conn4D.Core.ThreadContext in '..\..\src\Core\Services\Conn4D.Core.ThreadContext.pas',
+  Conn4D.Core.PoolStore in '..\..\src\Core\Services\Conn4D.Core.PoolStore.pas',
+  Conn4D.Core.ObserverBroadcaster in '..\..\src\Core\Services\Conn4D.Core.ObserverBroadcaster.pas',
+  Conn4D.Core.Registry in '..\..\src\Core\Services\Conn4D.Core.Registry.pas',
+  Conn4D.Core.HealthMonitor in '..\..\src\Core\Services\Conn4D.Core.HealthMonitor.pas',
+  Conn4D.Core.TransactionMgr in '..\..\src\Core\Services\Conn4D.Core.TransactionMgr.pas',
+  Conn4D.Core.PoolManager in '..\..\src\Core\Services\Conn4D.Core.PoolManager.pas',
+  Conn4D.Core.Factory in '..\..\src\Core\Services\Conn4D.Core.Factory.pas',
+  Conn4D.Core.GarbageCollector in '..\..\src\Core\Services\Conn4D.Core.GarbageCollector.pas',
+  Conn4D.Adapter.ConnRef in '..\..\src\Adapters\Conn4D.Adapter.ConnRef.pas',
+  Conn4D.Adapter.Engines in '..\..\src\Adapters\Conn4D.Adapter.Engines.pas',
+  Conn4D.Adapter.FireDAC.VendorLib in '..\..\src\Adapters\FireDAC\Conn4D.Adapter.FireDAC.VendorLib.pas',
+  Conn4D.Adapter.FireDAC.Providers in '..\..\src\Adapters\FireDAC\Conn4D.Adapter.FireDAC.Providers.pas',
+  Conn4D.Adapter.FireDAC.Provider.Firebird in '..\..\src\Adapters\FireDAC\Conn4D.Adapter.FireDAC.Provider.Firebird.pas',
+  Conn4D.Adapter.FireDAC.Provider.MSSQL in '..\..\src\Adapters\FireDAC\Conn4D.Adapter.FireDAC.Provider.MSSQL.pas',
+  Conn4D.Adapter.FireDAC.Provider.MySQL in '..\..\src\Adapters\FireDAC\Conn4D.Adapter.FireDAC.Provider.MySQL.pas',
+  Conn4D.Adapter.FireDAC.Provider.PostgreSQL in '..\..\src\Adapters\FireDAC\Conn4D.Adapter.FireDAC.Provider.PostgreSQL.pas',
+  Conn4D.Adapter.FireDAC.Provider.SQLite in '..\..\src\Adapters\FireDAC\Conn4D.Adapter.FireDAC.Provider.SQLite.pas',
+  Conn4D.Adapter.FireDAC.VCL in '..\..\src\Adapters\FireDAC\Conn4D.Adapter.FireDAC.VCL.pas',
+  Conn4D.Engine.FireDAC in '..\..\src\Adapters\FireDAC\Conn4D.Engine.FireDAC.pas',
+  Conn4D.Adapter.FireDAC in '..\..\src\Adapters\FireDAC\Conn4D.Adapter.FireDAC.pas',
+  Conn4D.Engine.Zeos in '..\..\src\Adapters\Zeos\Conn4D.Engine.Zeos.pas',
+  Conn4D.Adapter.Zeos in '..\..\src\Adapters\Zeos\Conn4D.Adapter.Zeos.pas',
+  Conn4D.Engine.UniDAC in '..\..\src\Adapters\UniDAC\Conn4D.Engine.UniDAC.pas',
+  Conn4D.Adapter.UniDAC in '..\..\src\Adapters\UniDAC\Conn4D.Adapter.UniDAC.pas',
+  Conn4D.Component in '..\..\src\Component\Conn4D.Component.pas',
+  Conn4D in '..\..\src\Conn4D.pas';
 
 end.

@@ -1,97 +1,48 @@
-# Delphi build artifacts
-*.dcu
-*.dcp
-*.bpl
-*.drc
-*.map
-*.rsm
-*.identcache
-*.tvsconfig
-*.local
-*.stat
-*.delphilsp.json
+# ===== Conn4D / Delphi =====
 
-# Executables and libraries
-*.exe
-*.dll
-
-# C++ Builder artifacts
-*.obj
-*.hpp
-*.ilc
-*.ild
-*.ilf
-*.ils
-*.o
-
-# Delphi history and caches
-__history/
-__recovery/
-*.~*
-*.ddp
-*.dsk
-*.tmp
-*.bak
-*.backup
-*.orig
-*.rej
-*.dproj.local
-*.groupproj.local
-
-# Build output folders
-**/build/
-**/dist/
-**/out/
-**/bin/
-Win32/
-Win64/
-OSX64/
-Linux64/
-
-# IDE and workspace
-.vscode/
-.idea/
-*.code-workspace
-*.launch
-*.launch.json
-
-# Test and tool outputs
-coverage/
-reports/
-*.log
-dunitx-results.xml
-*.out
-*.err
-
-# Sample connection settings (real credentials — never commit)
+# Configuracoes LOCAIS com dados reais (o *.example.ini SOBE no git)
+samples/ConnMonitor/build/settings.ini
 **/settings.ini
 
-# Local environment and secrets
-.env
-.env.*
-*.env
-*.secret
-*.secrets
-*.token
-*.apikey
-
-# Local databases (never commit database files)
-*.fdb
-*.gdb
-*.db
-*.sqlite
-*.sqlite3
-*.sdf
-*.mdb
-
-# Claude Code local settings (personal developer config)
-.claude/
-
-# Vendored dependencies (installed by Boss)
-modules/
-
-# Boss packages
-boss-lock.json
-
-# Build artifacts produced by scripts/boss-build.ps1 (boss postinstall)
+# Saidas de compilacao de pacotes / apps
+packages/**/build/
+samples/**/build/
 bin/
+**/*.bpl
+**/*.bpi
+**/*.dcp
+**/*.dcu
+**/*.exe
+**/*.lib
+
+# Bibliotecas nativas redistribuiveis dos vendors (Firebird, Borland, etc.).
+# NAO redistribua binarios de terceiros pelo repo - o usuario baixa do vendor.
+**/*.dll
+
+# Cache do Delphi Language Server (delphilsp): VAZA o layout COMPLETO do disco
+# local, usuario do Windows e caminhos de outros projetos. NUNCA versionar.
+**/*.delphilsp.json
+
+# Configuracao do Claude Code (caminhos absolutos da maquina + lista de
+# permissoes local). As SKILLS em .claude/skills/ continuam versionadas.
+.claude/settings.json
+.claude/settings.local.json
+
+# Artefatos do compilador / IDE Delphi
+*.local
+*.identcache
+*.tvsconfig
+*.skincfg
+*.~*
+__history/
+__recovery/
+*.dsk
+*.stat
+*.map
+*.rsm
+modules/
+boss.lock
+
+# Saidas temporarias dos scripts
+_dcu/
+out/
