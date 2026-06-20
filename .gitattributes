@@ -1,2 +1,32 @@
-# Auto detect text files and perform LF normalization
+# Normalizacao de fim de linha para o repositorio.
+# Por padrao, o Git decide texto vs binario e normaliza para LF no repo.
 * text=auto
+
+# Fontes Delphi e afins: texto, com CRLF no checkout (convencao do RAD Studio).
+*.pas    text eol=crlf
+*.dpr    text eol=crlf
+*.dpk    text eol=crlf
+*.dproj  text eol=crlf
+*.groupproj text eol=crlf
+*.inc    text eol=crlf
+*.rc     text eol=crlf
+*.dfm    text eol=crlf
+*.fmx    text eol=crlf
+
+# Scripts e configuracao.
+*.ps1    text eol=crlf
+*.json   text
+*.md     text
+*.ini    text
+*.gitignore text
+*.gitattributes text
+
+# Binarios: nunca normalizar nem diff como texto.
+*.dcr    binary
+*.res    binary
+*.bmp    binary
+*.ico    binary
+*.png    binary
+*.dll    binary
+*.bpl    binary
+*.exe    binary

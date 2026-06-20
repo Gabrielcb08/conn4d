@@ -1,0 +1,3 @@
+/* Ícone de paleta do componente TConn4D.
+   O nome do recurso DEVE bater com a classe em maiúsculas: TCONN4D. */
+TCONN4D BITMAP "icons\\Conn4D.bmp"

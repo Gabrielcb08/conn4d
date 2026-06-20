@@ -1,21 +1,19 @@
 {
-	"name": "conn4d",
-	"description": "Provider-neutral connection management library for Delphi 12 (FireDAC adapter included). Named pools, RAII handles and transactions, background sweep — no SQL execution, no ORM.",
-	"version": "v1.0.0",
-	"homepage": "https://github.com/gabrielcb08/conn4d",
-	"mainsrc": "./src",
-	"projects": [
-		"./packages/Delphi12/Conn4D.dproj",
-		"./tests/Conn4D.Tests/Conn4D.Tests.dproj",
-		"./samples/BasicUsage/BasicUsage.dproj",
-		"./samples/AdvancedUsage/AdvancedUsage.dproj",
-		"./samples/FormUsage/FormUsage.dproj"
-	],
-	"dependencies": {
-		"github.com/VSoftTechnologies/DUnitX": "^1.0.0",
-		"github.com/andriwsluna/Spring4D": "v1.0.1"
-	},
-	"scripts": {
-		"postinstall": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/boss-build.ps1"
-	}
+  "name": "conn4d",
+  "description": "Biblioteca de gerenciamento de conexoes agnostica de engine para Delphi 12 (adapter FireDAC incluso; Zeos/UniDAC opcionais). Pool por instancia, garbage collector de conexoes, thread-safety e transacoes - sem execucao de SQL, sem ORM.",
+  "version": "v2.0.0",
+  "homepage": "https://github.com/gabrielcb08/conn4d",
+  "mainsrc": "./src",
+  "projects": [
+    "./packages/Delphi12/Conn4D.dproj",
+    "./packages/Delphi12/dclConn4D.dproj",
+    "./tests/Conn4D.Tests.dproj",
+    "./samples/ConnMonitor/ConnMonitor.dproj"
+  ],
+  "dependencies": {
+    "github.com/VSoftTechnologies/DUnitX": "^1.0.0"
+  },
+  "scripts": {
+    "postinstall": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/boss-build.ps1"
+  }
 }

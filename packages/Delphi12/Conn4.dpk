@@ -1,0 +1,89 @@
+﻿package Conn4;
+
+{
+  Conn4D — Pacote RUNTIME (Conn4.bpl)
+
+  Contém toda a biblioteca: Shared + Core + Adapters + componente TConn4D.
+  Requer apenas rtl + FireDAC (engine padrão). As units de Zeos/UniDAC
+  estão incluídas mas compilam VAZIAS sem os defines em Conn4D.inc — habilitar
+  uma engine exige ligar o define E adicionar o pacote dela em "requires".
+}
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE RELEASE}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Conn4D Runtime - connection pool, GC e thread-safety (Clean Architecture)'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  FireDAC;
+
+contains
+  { Shared }
+  Conn4D.Shared.Types in '..\..\src\Shared\Conn4D.Shared.Types.pas',
+  Conn4D.Shared.Config in '..\..\src\Shared\Conn4D.Shared.Config.pas',
+  Conn4D.Shared.Exceptions in '..\..\src\Shared\Conn4D.Shared.Exceptions.pas',
+  Conn4D.Shared.Logger in '..\..\src\Shared\Conn4D.Shared.Logger.pas',
+  { Core / Abstractions }
+  Conn4D.Core.Base in '..\..\src\Core\Abstractions\Conn4D.Core.Base.pas',
+  Conn4D.Core.Engine in '..\..\src\Core\Abstractions\Conn4D.Core.Engine.pas',
+  Conn4D.Core.Pool in '..\..\src\Core\Abstractions\Conn4D.Core.Pool.pas',
+  Conn4D.Core.Transaction in '..\..\src\Core\Abstractions\Conn4D.Core.Transaction.pas',
+  Conn4D.Core.HealthCheck in '..\..\src\Core\Abstractions\Conn4D.Core.HealthCheck.pas',
+  Conn4D.Core.Observer in '..\..\src\Core\Abstractions\Conn4D.Core.Observer.pas',
+  Conn4D.Core.GC in '..\..\src\Core\Abstractions\Conn4D.Core.GC.pas',
+  Conn4D.Core.Clock in '..\..\src\Core\Abstractions\Conn4D.Core.Clock.pas',
+  Conn4D.Core.Monitor in '..\..\src\Core\Abstractions\Conn4D.Core.Monitor.pas',
+  Conn4D.Core in '..\..\src\Core\Abstractions\Conn4D.Core.pas',
+  { Core / Services }
+  Conn4D.Core.Config in '..\..\src\Core\Services\Conn4D.Core.Config.pas',
+  Conn4D.Core.SystemClock in '..\..\src\Core\Services\Conn4D.Core.SystemClock.pas',
+  Conn4D.Core.Semaphore in '..\..\src\Core\Services\Conn4D.Core.Semaphore.pas',
+  Conn4D.Core.ThreadSafeQueue in '..\..\src\Core\Services\Conn4D.Core.ThreadSafeQueue.pas',
+  Conn4D.Core.ThreadContext in '..\..\src\Core\Services\Conn4D.Core.ThreadContext.pas',
+  Conn4D.Core.PoolStore in '..\..\src\Core\Services\Conn4D.Core.PoolStore.pas',
+  Conn4D.Core.ObserverBroadcaster in '..\..\src\Core\Services\Conn4D.Core.ObserverBroadcaster.pas',
+  Conn4D.Core.Registry in '..\..\src\Core\Services\Conn4D.Core.Registry.pas',
+  Conn4D.Core.HealthMonitor in '..\..\src\Core\Services\Conn4D.Core.HealthMonitor.pas',
+  Conn4D.Core.TransactionMgr in '..\..\src\Core\Services\Conn4D.Core.TransactionMgr.pas',
+  Conn4D.Core.PoolManager in '..\..\src\Core\Services\Conn4D.Core.PoolManager.pas',
+  Conn4D.Core.Factory in '..\..\src\Core\Services\Conn4D.Core.Factory.pas',
+  Conn4D.Core.GarbageCollector in '..\..\src\Core\Services\Conn4D.Core.GarbageCollector.pas',
+  { Adapters }
+  Conn4D.Adapter.ConnRef in '..\..\src\Adapters\Conn4D.Adapter.ConnRef.pas',
+  Conn4D.Adapter.Engines in '..\..\src\Adapters\Conn4D.Adapter.Engines.pas',
+  Conn4D.Engine.FireDAC in '..\..\src\Adapters\FireDAC\Conn4D.Engine.FireDAC.pas',
+  Conn4D.Adapter.FireDAC in '..\..\src\Adapters\FireDAC\Conn4D.Adapter.FireDAC.pas',
+  Conn4D.Engine.Zeos in '..\..\src\Adapters\Zeos\Conn4D.Engine.Zeos.pas',
+  Conn4D.Adapter.Zeos in '..\..\src\Adapters\Zeos\Conn4D.Adapter.Zeos.pas',
+  Conn4D.Engine.UniDAC in '..\..\src\Adapters\UniDAC\Conn4D.Engine.UniDAC.pas',
+  Conn4D.Adapter.UniDAC in '..\..\src\Adapters\UniDAC\Conn4D.Adapter.UniDAC.pas',
+  { Componente + fachada pública }
+  Conn4D.Component in '..\..\src\Component\Conn4D.Component.pas',
+  Conn4D in '..\..\src\Conn4D.pas';
+
+end.
